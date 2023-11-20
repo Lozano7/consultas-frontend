@@ -27,7 +27,7 @@ export const getClientNameFromUrl = (url: string) =>
  */
 export const getProtocol = () => {
   return process.env.NEXT_PUBLIC_KEY_MODE === 'production' ||
-    process.env.NEXT_PUBLIC_HTTPS
+    process.env.NEXT_PUBLIC_HTTPS === 'true'
     ? 'https'
     : 'http';
 };

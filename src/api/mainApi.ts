@@ -13,8 +13,9 @@ mainApi.interceptors.request.use(
 
     const token = localStorage.getItem('x-token');
 
-    config.headers['Content-Type'] = 'application/json';
-    config.headers['Authorization'] = `Bearer ${token}`;
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
 
     return config;
   },
@@ -30,7 +31,6 @@ mainApi.interceptors.response.use(
   function (error: any) {
     if (error.response.status === 401) {
       localStorage.removeItem('x-token');
-      window.location.href = '/login';
     }
 
     return Promise.reject(error);

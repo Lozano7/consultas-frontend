@@ -3,6 +3,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { IconFile, IconSquareRoundedXFilled } from '@tabler/icons-react';
 import { useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import ConfirmDialog from './ConfirmDialog';
 
 interface DragAndDropProps {
   acceptedFileTypes: {
@@ -11,6 +12,13 @@ interface DragAndDropProps {
   maxSize?: number;
   maxFiles?: number;
   height?: string;
+  handleUpload: (
+    file: File,
+    seLoading: (loading: boolean) => void,
+    setIsSuccess: (isSuccess: boolean) => void,
+    setIsError: (isError: boolean) => void,
+    setErrorMessage: (errorMessage: string) => void
+  ) => void;
 }
 
 export const DragAndDrop = ({
@@ -18,8 +26,15 @@ export const DragAndDrop = ({
   maxSize,
   height,
   maxFiles = 1,
+  handleUpload,
 }: DragAndDropProps) => {
   const [files, setfiles] = useState<File[]>([]);
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const [loading, setLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [iserror, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
     accept: acceptedFileTypes,
@@ -130,7 +145,6 @@ export const DragAndDrop = ({
               </Box>
             </Box>
           </Box>
-
           <Box
             sx={{
               mt: 4,
@@ -139,10 +153,43 @@ export const DragAndDrop = ({
               alignItems: 'center',
             }}
           >
-            <Button variant='contained' color='primary'>
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={() => {
+                setOpenDialog(true);
+              }}
+            >
               Subir
             </Button>
           </Box>
+          {openDialog && (
+            <ConfirmDialog
+              open={openDialog}
+              onClose={() => {
+                setOpenDialog(false);
+                setIsSuccess(false);
+                setIsError(false);
+                setErrorMessage('');
+                setfiles([]);
+              }}
+              onAccept={() => {
+                handleUpload(
+                  files[0],
+                  setLoading,
+                  setIsSuccess,
+                  setIsError,
+                  setErrorMessage
+                );
+              }}
+              loading={loading}
+              isSuccess={isSuccess}
+              iserror={iserror}
+              errorMessage={errorMessage}
+              title='Está a punto de subir un archivo que actualizará la lista de estudiantes matriculados'
+              subtitle='¿Está seguro de que desea actualizar la lista de estudiantes matriculados? Esta acción no se puede deshacer.'
+            />
+          )}
         </>
       )}
     </>

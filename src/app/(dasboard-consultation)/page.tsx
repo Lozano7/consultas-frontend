@@ -2,11 +2,20 @@
 import LogoUg from '@/components/shared/LogoUg';
 import { Box, Button, Card, Grid } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import PageContainer from '../dashboard/components/container/PageContainer';
 import SearchStatus from './components/SearchStatus';
 
 const Dashboard = () => {
   const router = useRouter();
+
+  const [isLoggin, setIsLoggin] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && localStorage.getItem('x-token')) {
+      setIsLoggin(true);
+    }
+  }, []);
 
   return (
     <PageContainer
@@ -39,10 +48,14 @@ const Dashboard = () => {
             variant='outlined'
             color='primary'
             onClick={() => {
-              router.push('/auth/login');
+              if (isLoggin) {
+                router.push('/dashboard/change-status');
+              } else {
+                router.push('/auth/login');
+              }
             }}
           >
-            Login
+            {isLoggin ? 'Ir al panel de administración' : 'Iniciar sesión'}
           </Button>
           <Grid
             item

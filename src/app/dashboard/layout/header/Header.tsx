@@ -1,17 +1,9 @@
-import {
-  AppBar,
-  Badge,
-  Box,
-  IconButton,
-  Stack,
-  Toolbar,
-  styled,
-} from '@mui/material';
+import { AppBar, Box, IconButton, Stack, Toolbar, styled } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 // components
-import { IconBellRinging, IconMenu } from '@tabler/icons-react';
+import { IconMenu } from '@tabler/icons-react';
 import Profile from './Profile';
 
 interface ItemType {
@@ -64,7 +56,7 @@ const Header = ({ toggleMobileSidebar }: ItemType) => {
           >
             Upgrade to Pro
           </Button> */}
-          <IconButton
+          {/* <IconButton
             size='large'
             aria-label='show 11 new notifications'
             color='inherit'
@@ -74,7 +66,7 @@ const Header = ({ toggleMobileSidebar }: ItemType) => {
             <Badge variant='dot' color='primary'>
               <IconBellRinging size='21' stroke='1.5' />
             </Badge>
-          </IconButton>
+          </IconButton> */}
           <Profile />
         </Stack>
       </ToolbarStyled>

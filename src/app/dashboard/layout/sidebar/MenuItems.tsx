@@ -1,4 +1,4 @@
-import { IconEdit, IconUpload } from '@tabler/icons-react';
+import { IconArrowBack, IconEdit, IconUpload } from '@tabler/icons-react';
 
 import { uniqueId } from 'lodash';
 
@@ -23,6 +23,16 @@ const Menuitems = [
     title: 'Actualizar listado',
     icon: IconUpload,
     href: '/dashboard/update-student-list',
+  },
+  {
+    navlabel: true,
+    subheader: 'Back',
+  },
+  {
+    id: uniqueId(),
+    title: 'Volver a consultas',
+    icon: IconArrowBack,
+    href: '/',
   },
 
   /*{

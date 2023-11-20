@@ -1,17 +1,7 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  IconButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-} from '@mui/material';
-import Link from 'next/link';
+'use client';
+import { Avatar, Box, Button, IconButton, Menu } from '@mui/material';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-
-import { IconListCheck, IconMail, IconUser } from '@tabler/icons-react';
 
 const Profile = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
@@ -21,6 +11,8 @@ const Profile = () => {
   const handleClose2 = () => {
     setAnchorEl2(null);
   };
+
+  const router = useRouter();
 
   return (
     <Box>
@@ -63,33 +55,17 @@ const Profile = () => {
           },
         }}
       >
-        <MenuItem>
-          <ListItemIcon>
-            <IconUser width={20} />
-          </ListItemIcon>
-          <ListItemText>My Profile</ListItemText>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <IconMail width={20} />
-          </ListItemIcon>
-          <ListItemText>My Account</ListItemText>
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <IconListCheck width={20} />
-          </ListItemIcon>
-          <ListItemText>My Tasks</ListItemText>
-        </MenuItem>
         <Box mt={1} py={1} px={2}>
           <Button
-            href='/auth/login'
             variant='outlined'
             color='primary'
-            component={Link}
             fullWidth
+            onClick={() => {
+              localStorage.removeItem('x-token');
+              router.push('/');
+            }}
           >
-            Logout
+            Cerrar sesión
           </Button>
         </Box>
       </Menu>

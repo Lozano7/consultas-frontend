@@ -1,7 +1,7 @@
 'use client';
 
 import PageContainer from '@/app/dashboard/components/container/PageContainer';
-import Logo from '@/app/dashboard/layout/shared/logo/Logo';
+import LogoUg from '@/components/shared/LogoUg';
 import { Box, Card, Grid, Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 import AuthRegister from '../../../components/auth/AuthRegister';
@@ -44,19 +44,9 @@ const Register2 = () => (
             sx={{ p: 4, zIndex: 1, width: '100%', maxWidth: '500px' }}
           >
             <Box display='flex' alignItems='center' justifyContent='center'>
-              <Logo />
+              <LogoUg />
             </Box>
             <AuthRegister
-              subtext={
-                <Typography
-                  variant='subtitle1'
-                  textAlign='center'
-                  color='textSecondary'
-                  mb={1}
-                >
-                  Your Social Campaigns
-                </Typography>
-              }
               subtitle={
                 <Stack
                   direction='row'
@@ -69,18 +59,18 @@ const Register2 = () => (
                     variant='h6'
                     fontWeight='400'
                   >
-                    Already have an Account?
+                    ¿Ya tienes una cuenta?
                   </Typography>
                   <Typography
                     component={Link}
-                    href='/authentication/login'
+                    href='/auth/login'
                     fontWeight='500'
                     sx={{
                       textDecoration: 'none',
                       color: 'primary.main',
                     }}
                   >
-                    Sign In
+                    Iniciar sesión
                   </Typography>
                 </Stack>
               }
